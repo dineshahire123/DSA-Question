@@ -1,0 +1,29 @@
+public class SumOfSquareOfSpecialElement {
+
+    public static double calculateAverage(int[] nums) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        return (double) sum / nums.length;
+    }
+
+    public static double sumOfSquareOfSpecialElements(int[] nums) {
+        double average = calculateAverage(nums);
+        double sumOfSquare = 0;
+
+        for (int num : nums) {
+            if (num > average && num > 0) {
+                sumOfSquare += Math.pow(num, 2);
+            }
+        }
+
+        return sumOfSquare;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 5, 3, 2, 7, 4};
+        double result = sumOfSquareOfSpecialElements(nums);
+        System.out.println("Sum of squares of special elements: " + result);
+    }
+}

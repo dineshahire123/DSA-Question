@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class ArrayDegree {
+
+    public static int findDegree(int[] nums) {
+        // Step 1: Create a HashMap to store the frequency of each element
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : nums) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Step 2: Find the maximum frequency (degree) of any element
+        int maxFrequency = 0;
+        for (int frequency : frequencyMap.values()) {
+            maxFrequency = Math.max(maxFrequency, frequency);
+        }
+
+        // Step 3: Find the smallest subarray with the maximum frequency
+        int degree = maxFrequency;
+        int minLength = Integer.MAX_VALUE;
+        for (int num : frequencyMap.keySet()) {
+            if (frequencyMap.get(num) == maxFrequency) {
+                int startIndex = 0;
+                int endIndex = nums.length - 1;
+                while (nums[startIndex] != num) {
+                    startIndex++;
+                }
+                while (nums[endIndex] != num) {
+                    endIndex--;
+                }
+                minLength = Math.min(minLength, endIndex - startIndex + 1);
+            }
+        }
+
+        return minLength;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 2, 3, 1, 4, 2}; // Example array
+        int degree = findDegree(nums);
+        System.out.println("Degree of the array: " + degree);
+    }
+}

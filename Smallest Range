@@ -1,0 +1,30 @@
+import java.util.Arrays;
+
+public class SmallestRange {
+    public static int[] findSmallestRange(int[] nums) {
+        // Sort the array in ascending order
+        Arrays.sort(nums);
+
+        int smallestRangeStart = 0;
+        int smallestRangeEnd = 0;
+        int minRange = Integer.MAX_VALUE;
+
+        // Find the range with the smallest difference
+        for (int i = 0; i < nums.length - 1; i++) {
+            int range = nums[i + 1] - nums[i];
+            if (range < minRange) {
+                minRange = range;
+                smallestRangeStart = i;
+                smallestRangeEnd = i + 1;
+            }
+        }
+
+        return new int[]{nums[smallestRangeStart], nums[smallestRangeEnd]};
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {4, 2, 8, 1, 5, 7};
+        int[] result = findSmallestRange(nums);
+        System.out.println("Smallest range: [" + result[0] + ", " + result[1] + "]");
+    }
+}

@@ -1,0 +1,29 @@
+public class SmallestLetterGreaterThanTarget {
+    public static char findSmallestLetterGreaterThanTarget(char[] letters, char target) {
+        int left = 0;
+        int right = letters.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (letters[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        // When the loop ends, 'left' will be pointing to the index where the next smallest letter should be
+        // If 'left' is out of bounds, that means the target is greater than all the letters in the array
+        // In that case, wrap around and return the first letter in the array.
+        return (left < letters.length) ? letters[left] : letters[0];
+    }
+
+    public static void main(String[] args) {
+        char[] letters = {'a', 'c', 'f', 'h', 'k'};
+        char target = 'd';
+
+        char result = findSmallestLetterGreaterThanTarget(letters, target);
+        System.out.println("The smallest letter greater than '" + target + "' is: " + result);
+    }
+}

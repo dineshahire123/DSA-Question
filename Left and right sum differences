@@ -1,0 +1,28 @@
+public class LeftRightSumDifference {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8};
+        
+        int difference = calculateDifference(array);
+        System.out.println("Difference between left and right sums: " + difference);
+    }
+    
+    public static int calculateDifference(int[] array) {
+        int totalSum = 0;
+        for (int num : array) {
+            totalSum += num;
+        }
+        
+        int leftSum = 0;
+        int rightSum = totalSum;
+        int minDifference = Integer.MAX_VALUE;
+        
+        for (int i = 0; i < array.length - 1; i++) {
+            leftSum += array[i];
+            rightSum -= array[i];
+            int currentDifference = Math.abs(leftSum - rightSum);
+            minDifference = Math.min(minDifference, currentDifference);
+        }
+        
+        return minDifference;
+    }
+}

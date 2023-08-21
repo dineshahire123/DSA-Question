@@ -1,0 +1,37 @@
+import java.util.HashMap;
+
+public class LongestSubstringUniqueChars {
+    public static String findLongestSubstring(String input) {
+        if (input == null || input.length() == 0) {
+            return "";
+        }
+
+        int maxLength = 0;
+        int start = 0;
+        int maxStart = 0;
+        HashMap<Character, Integer> charIndexMap = new HashMap<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+
+            if (charIndexMap.containsKey(c) && charIndexMap.get(c) >= start) {
+                start = charIndexMap.get(c) + 1;
+            }
+
+            charIndexMap.put(c, i);
+
+            if (i - start + 1 > maxLength) {
+                maxLength = i - start + 1;
+                maxStart = start;
+            }
+        }
+
+        return input.substring(maxStart, maxStart + maxLength);
+    }
+
+    public static void main(String[] args) {
+        String input = "abcabcbb"; // Change this to your input string
+        String longestUniqueSubstring = findLongestSubstring(input);
+        System.out.println("Longest Substring with Unique Characters: " + longestUniqueSubstring);
+    }
+}

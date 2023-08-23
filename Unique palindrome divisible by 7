@@ -1,0 +1,30 @@
+public class UniquePalindromeDivisibleBy7 {
+    public static void main(String[] args) {
+        int num = 0;
+
+        while (true) {
+            // Check if the number is a palindrome and divisible by 7
+            if (isPalindrome(num) && num % 7 == 0) {
+                System.out.println("Unique Palindrome Divisible by 7: " + num);
+                break;
+            }
+
+            // Increment the number for the next iteration
+            num++;
+        }
+    }
+
+    // Function to check if a number is a palindrome
+    public static boolean isPalindrome(int num) {
+        int originalNum = num;
+        int reversedNum = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            reversedNum = reversedNum * 10 + digit;
+            num /= 10;
+        }
+
+        return originalNum == reversedNum;
+    }
+}
